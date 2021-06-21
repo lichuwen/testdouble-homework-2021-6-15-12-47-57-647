@@ -42,7 +42,7 @@ public class Printer {
         return lines;
     }
 
-    protected String statementLine(Transaction transaction, int runningBalance) {
+    public String statementLine(Transaction transaction, int runningBalance) {
         return transaction.date()
                 + SEPARATOR
                 + transaction.amount()
