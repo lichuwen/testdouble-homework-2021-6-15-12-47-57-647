@@ -20,12 +20,12 @@ class PrinterTest {
     @BeforeEach
     public void setUp() {
         console = Mockito.mock(Console.class);
+        transaction = Mockito.mock(Transaction.class);
         printer = new Printer(console);
-        transaction = new Transaction("2021-06-21", 1);
     }
 
     @Test
-    public void should_print_statement_with_right_format_when_print() {
+    public void should_print_statement_when_print() {
         //given
         List<Transaction> transactions = Collections.singletonList(transaction);
         //when
@@ -35,10 +35,12 @@ class PrinterTest {
     }
 
     @Test
-    public void should_return_string_when_call_statementLine() {
+    public void should_print_statement_with_right_format_when_print() {
         //given
-        int runningBalance = 100;
+        int runningBalance = 1;
         //when
+        Mockito.when(transaction.date()).thenReturn("2021-06-21");
+        Mockito.when(transaction.amount()).thenReturn(1);
         String result = printer.statementLine(transaction, runningBalance);
         //then
         Assertions.assertEquals(String.format("%s | %s | %s",transaction.date(), transaction.amount(),runningBalance), result);
